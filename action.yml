@@ -1,0 +1,26 @@
+name: 'Upload Image to Lark/Feishu'
+description: 'Upload an image to Lark/Feishu and get the image_key'
+author: 'keaising'
+
+inputs:
+  platform:
+    description: 'Platform to use: lark or feishu'
+    required: true
+    default: 'lark'
+  app-id:
+    description: 'Lark/Feishu App ID'
+    required: true
+  app-secret:
+    description: 'Lark/Feishu App Secret'
+    required: true
+  image:
+    description: 'Base64 encoded image string'
+    required: true
+
+outputs:
+  image_key:
+    description: 'The uploaded image key from Lark/Feishu'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

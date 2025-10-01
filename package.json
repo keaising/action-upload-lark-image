@@ -1,0 +1,28 @@
+{
+  "name": "action-upload-lark-image",
+  "version": "1.0.0",
+  "description": "Upload image to Lark/Feishu",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js -o dist --license licenses.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keaising/action-upload-lark-image.git"
+  },
+  "keywords": [],
+  "author": "keaising",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/keaising/action-upload-lark-image/issues"
+  },
+  "homepage": "https://github.com/keaising/action-upload-lark-image#readme",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "@larksuiteoapi/node-sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.4"
+  }
+}

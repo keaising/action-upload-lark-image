@@ -80,7 +80,10 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+
+# Ignore everything in dist/ except index.js
+dist/*
+!dist/index.js
 
 # Gatsby files
 .cache/
