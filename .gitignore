@@ -85,6 +85,11 @@ out
 dist/*
 !dist/index.js
 
+# Test files and images
+*.local.js
+.env.local
+.secrets
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js

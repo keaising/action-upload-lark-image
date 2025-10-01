@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import lark from '@larksuiteoapi/node-sdk'
+import { Readable } from 'node:stream'
 
 async function main() {
   try {
@@ -33,25 +34,36 @@ async function upload(platform, appId, appSecret, image) {
   // Convert base64 string to Buffer
   // Remove data:image prefix if present
   const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
-  const imageBuffer = Buffer.from(base64Data, 'base64');
+  const buffer = Buffer.from(base64Data, 'base64');
+
+  // Convert Buffer to Readable Stream (form-data requires a stream)
+  const file = Readable.from(buffer);
+  // Add file metadata that form-data expects
+  file.path = 'image.png';
 
   try {
     const res = await client.im.v1.image.create({
       data: {
         image_type: 'message',
-        image: imageBuffer,
+        image: file,
       },
     });
 
-    if (res.code === 0 || res.message === 'success') {
+    core.info(`Response: ${JSON.stringify(res, null, 2)}`);
+
+    // SDK returns the data object directly on success
+    if (res.image_key) {
       return {
-        image_key: res.data.image_key
+        image_key: res.image_key
       }
     }
+
+    // Handle error response
     return {
-      message: `upload failed, code:${res.code}, message: ${res.message}`
+      message: `upload failed, code:${res.code}, message: ${res.msg || res.message}, full response: ${JSON.stringify(res)}`
     }
   } catch (e) {
+    core.error(`Exception: ${JSON.stringify(e, Object.getOwnPropertyNames(e))}`);
     return {
       message: `upload error, message: ${e.message || e}`
     }
