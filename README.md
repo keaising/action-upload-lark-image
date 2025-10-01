@@ -9,6 +9,7 @@ A GitHub Action to upload images to Lark/Feishu and get the image_key for use in
   id: upload
   uses: keaising/action-upload-lark-image@v1
   with:
+    platform: feishu
     app-id: ${{ secrets.LARK_APP_ID }}
     app-secret: ${{ secrets.LARK_APP_SECRET }}
     image: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJ...' # Base64 encoded image
@@ -21,6 +22,7 @@ A GitHub Action to upload images to Lark/Feishu and get the image_key for use in
 
 | Input | Description | Required |
 |-------|-------------|----------|
+| `platform` | `feishu` or `lark` | Yes |
 | `app-id` | Lark/Feishu App ID | Yes |
 | `app-secret` | Lark/Feishu App Secret | Yes |
 | `image` | Base64 encoded image string (with or without `data:image/...;base64,` prefix) | Yes |
